@@ -1,14 +1,11 @@
-# Expo Router Example
+# React Native Clone Coding
 
-Use [`expo-router`](https://expo.github.io/router) to build native navigation using files in the `app/` directory.
+> **Note**: 모든 코드는 유튜브 또는 다른 경로에서의 코드를 참조해서 작업하였습니다.
 
-## 🚀 How to use
+## Step 1:
 
-```sh
-npx create-expo-app -e with-router
-```
+원본링크 > [Youtube](https://)
 
-## 📝 Notes
+## 진행 요약
 
-- [Expo Router: Docs](https://expo.github.io/router)
-- [Expo Router: Repo](https://github.com/expo/router)
+-

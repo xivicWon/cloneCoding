@@ -1,13 +1,14 @@
-import { View, Text } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { Redirect } from "expo-router";
 
-const Intro = () => {
-  const isLogin = true;
-  if (isLogin) {
-    return <Redirect href="/home" />;
-  } else {
-    return <Redirect href="/login" />;
-  }
+const index = () => {
+  return (
+    <View>
+      <Text>index</Text>
+    </View>
+  );
 };
-export default Intro;
+
+export default index;
+
+const styles = StyleSheet.create({});
