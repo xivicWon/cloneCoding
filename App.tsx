@@ -1,7 +1,9 @@
-import {SafeAreaView, StyleSheet, Text} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon2 from 'react-native-vector-icons/FontAwesome5';
+import VectorImage from 'react-native-vector-image';
+
 const myButton = (
   <Icon.Button name="facebook" backgroundColor="#3b5998">
     Login with Facebook
@@ -29,6 +31,7 @@ const App = () => {
       {myIcon1}
       {myIcon2}
       {myIcon3}
+      <VectorImage source={require('./assets/wrench.svg')} />
     </SafeAreaView>
   );
 };
