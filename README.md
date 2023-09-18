@@ -8,7 +8,7 @@ react-native-vector-icons 에 대한 테스트 소스 입니다.
 
 ## Step 1: react-native-vector-icons Settings
 
-[원본참조링크](https://github.com/oblador/react-native-vector-icons)
+[원문링크](https://github.com/oblador/react-native-vector-icons)
 
 - ios
   - fonts 폴더 ios 에 복사 및 info에 fonts provided by application 에 수동 등록.
@@ -37,7 +37,15 @@ react-native-vector-icons 에 대한 테스트 소스 입니다.
        apply from: file("../../node_modules/react-native-vector-icons/fonts.gradle");
     ```
 
+## Troubleshooting
+
+- 아이콘이 원하는 아이콘이 나오지 않을경우
+  - IOS]fonts provided by application 에 등록한 .ttf 파일과 node_modules/react-native-vector-icons/Fonts/ 의 파일과 동일한지 체크.
+  - Android, IOS] 해당 폰트에 출력하고자 하는 텍스트가 있는지 확인한다.
+
 ## Step 2: react-native-vector-image Settings
+
+[원문링크](https://www.npmjs.com/package/react-native-vector-image)
 
 - ios
 
@@ -60,8 +68,13 @@ react-native-vector-icons 에 대한 테스트 소스 입니다.
        apply from: file("../../node_modules/react-native-vector-image/strip_svgs.gradle")
     ```
 
-- TrubleShot
-  - Text strings must be rendered within a <Text> component.
-    - 해당 컴포넌트에 세미콜론이 붙어있어서 발생된 에러.
-  - Error while updating property 'resourceName' of a view managed by:RNVectorDrawable
-    - yarn react-native-vector-image generate 로 실제 플랫폼별 사용될 이미지의 실제 파일을 생성해야 함.
+- 추가작업.
+
+  - 이미지를 실제 코드에 적용후 `yarn react-native-vector-image generate` 를 꼭 해주어야 실제 적용이 된다.
+
+## Troubleshooting
+
+- Text strings must be rendered within a <Text> component.
+  - 해당 컴포넌트에 세미콜론이 붙어있어서 발생된 에러.
+- Error while updating property 'resourceName' of a view managed by:RNVectorDrawable
+  - yarn react-native-vector-image generate 로 실제 플랫폼별 사용될 이미지의 실제 파일을 생성해야 함.
