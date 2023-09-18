@@ -16,6 +16,7 @@ cd ios && pod install && cd ..
 
 - react-native-svg 는 svg 코드를 읽을 수 있게 해주는 모듈
 - react-native-svg-transformer 는 기존 svg 파일을 불러와 읽을 수 있도록 해주는 모듈
+- react-native-svg-transformer는 react-native-svg가 있어야 동작가능하다.
 
 ## react-native-svg-transformer 을 위한 추가 작업
 
