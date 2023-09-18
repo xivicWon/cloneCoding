@@ -32,6 +32,7 @@ const App = () => {
       {myIcon2}
       {myIcon3}
       <VectorImage source={require('./assets/wrench.svg')} />
+      {/* <VectorImage source={require('./assets/icons/apple.svg')} /> */}
     </SafeAreaView>
   );
 };

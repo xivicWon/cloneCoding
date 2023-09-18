@@ -1,5 +1,9 @@
 react-native-vector-icons 에 대한 테스트 소스 입니다.
 
+# 현재 문제점.
+
+- SVG 파일에서 <pattern>, <image> 가 있는 파일은 generate가 안된다. - 즉 사용이 불가능.
+
 # Getting Started
 
 - npm i --save react-native-vector-icons
