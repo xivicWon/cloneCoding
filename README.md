@@ -21,7 +21,29 @@
       ```
     - 해당 keystore를 PROJECT/android/app 에 옮김
     - PROJECT/android/gradle.properties 의 설정값을 추가.
+      ```
+        MYAPP_UPLOAD_STORE_FILE=my-upload-key.keystore
+        MYAPP_UPLOAD_KEY_ALIAS=my-key-alias
+        MYAPP_UPLOAD_STORE_PASSWORD=123123
+        MYAPP_UPLOAD_KEY_PASSWORD=123123
+      ```
+      (정확한 참고는 코드로 직접 확인하세요.)
     - PROJECT/android/app/build.gradle 코드 추가
+      ```
+        // android.signingConfigs.release 추가하고,
+        release {
+              if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE')) {
+                  storeFile file(MYAPP_UPLOAD_STORE_FILE)
+                  storePassword MYAPP_UPLOAD_STORE_PASSWORD
+                  keyAlias MYAPP_UPLOAD_KEY_ALIAS
+                  keyPassword MYAPP_UPLOAD_KEY_PASSWORD
+              }
+        }
+
+        // android.buildTypes.release.signingConfig 추가 
+        signingConfig signingConfigs.release
+      ```
+      (정확한 참고는 코드로 직접 확인하세요.)
     - 빌드 명령어로 실행하면, keystore가 적용된 앱을 생성함.
       ```
       npm run android -- --mode=release
