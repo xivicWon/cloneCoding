@@ -10,8 +10,10 @@
     "test": "jest"
   },
   "dependencies": {
+    "@xstate/react": "^3.2.2",
     "react": "18.2.0",
-    "react-native": "0.72.4"
+    "react-native": "0.72.4",
+    "xstate": "^4.38.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
