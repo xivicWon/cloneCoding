@@ -56,3 +56,10 @@ Install and Setting
 ```bash
 
 ```
+
+카카오 개발자 안드로이드 키 해시 조회
+
+```sh
+keytool -exportcert -alias androiddebugkey -keystore ~/.android/debug.keystore -storepass android -keypass android | openssl sha1 -binary | openssl base64
+
+```

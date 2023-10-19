@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">cloneCoding</string>
+    <string name="kakao_app_key">f323c043aee0d38b7ed1a0d74fd1c3de</string>
+    <string name="kakao_app_oauth">kakaof323c043aee0d38b7ed1a0d74fd1c3de</string>
 </resources>
