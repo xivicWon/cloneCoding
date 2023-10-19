@@ -1,118 +1,113 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import React, {useState} from 'react';
+import {SafeAreaView, Button, View, Text, ScrollView} from 'react-native';
+import NaverLogin, {
+  NaverLoginResponse,
+  GetProfileResponse,
+} from '@react-native-seoul/naver-login';
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+const consumerKey = 'IWI_OODiX8CTR8VN49gJ';
+const consumerSecret = '_wA8PICYf8';
+const appName = 'saft';
+const serviceUrlScheme = 'naverLogin';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+const App = () => {
+  const [success, setSuccessResponse] =
+    useState<NaverLoginResponse['successResponse']>();
+  const [failure, setFailureResponse] =
+    useState<NaverLoginResponse['failureResponse']>();
+  const [getProfileRes, setGetProfileRes] = useState<GetProfileResponse>();
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+  const login = async () => {
+    const {failureResponse, successResponse} = await NaverLogin.login({
+      appName,
+      consumerKey,
+      consumerSecret,
+      serviceUrlScheme,
+    });
+    setSuccessResponse(successResponse);
+    setFailureResponse(failureResponse);
+  };
 
-function Section({children, title}: SectionProps): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
+  const logout = async () => {
+    try {
+      await NaverLogin.logout();
+      setSuccessResponse(undefined);
+      setFailureResponse(undefined);
+      setGetProfileRes(undefined);
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
-function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+  const getProfile = async () => {
+    try {
+      const profileResult = await NaverLogin.getProfile(success!.accessToken);
+      setGetProfileRes(profileResult);
+    } catch (e) {
+      setGetProfileRes(undefined);
+    }
+  };
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  const deleteToken = async () => {
+    try {
+      await NaverLogin.deleteToken();
+      setSuccessResponse(undefined);
+      setFailureResponse(undefined);
+      setGetProfileRes(undefined);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
+    <SafeAreaView
+      style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
       <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
+        style={{flex: 1}}
+        contentContainerStyle={{flexGrow: 1, padding: 24}}>
+        <Button title={'Login'} onPress={login} />
+        <Gap />
+        <Button title={'Logout'} onPress={logout} />
+        <Gap />
+        {success ? (
+          <>
+            <Button title="Get Profile" onPress={getProfile} />
+            <Gap />
+          </>
+        ) : null}
+        {success ? (
+          <View>
+            <Button title="Delete Token" onPress={deleteToken} />
+            <Gap />
+            <ResponseJsonText name={'Success'} json={success} />
+          </View>
+        ) : null}
+        <Gap />
+        {failure ? <ResponseJsonText name={'Failure'} json={failure} /> : null}
+        <Gap />
+        {getProfileRes ? (
+          <ResponseJsonText name={'GetProfile'} json={getProfileRes} />
+        ) : null}
       </ScrollView>
     </SafeAreaView>
   );
-}
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
+};
+const Gap = () => <View style={{marginTop: 24}} />;
+const ResponseJsonText = ({json = {}, name}: {json?: object; name: string}) => (
+  <View
+    style={{
+      padding: 12,
+      borderRadius: 16,
+      borderWidth: 1,
+      backgroundColor: '#242c3d',
+    }}>
+    <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>
+      {name}
+    </Text>
+    <Text style={{color: 'white', fontSize: 13, lineHeight: 20}}>
+      {JSON.stringify(json, null, 4)}
+    </Text>
+  </View>
+);
 
 export default App;
