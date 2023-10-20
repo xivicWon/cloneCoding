@@ -30,23 +30,24 @@
 				<string>naverLogin</string>
 			</array>
 		</dict>
-		<dict>
+		<!-- <dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>kakaoLogin</string>
+				<string>kakaof323c043aee0d38b7ed1a0d74fd1c3de</string>
 			</array>
-		</dict>
+		</dict> -->
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>KAKAO_APP_KEY</key>
+	<string>f323c043aee0d38b7ed1a0d74fd1c3de</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>naversearchapp</string>
 		<string>naversearchthirdlogin</string>
 		<string>kakaokompassauth</string>
-		<string>storykompassauth</string>
 		<string>kakaolink</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>

@@ -54,12 +54,65 @@ project > info > URL type 에서 URL Schemes 를 추가하는데. 해당 스킴�
 Install and Setting
 
 ```bash
-
+npm i @react-native-seoul/kakao-login
+or
+yarn add @react-native-seoul/kakao-login
 ```
 
-카카오 개발자 안드로이드 키 해시 조회
+#### IOS
+
+1.info.plist
+
+```xml
+<!-- 추가 -->
+<key>KAKAO_APP_KEY</key>
+<string>[네이티브 앱키]</string>
+<key>LSApplicationQueriesSchemes</key>
+<array>
+    <string>kakaokompassauth</string>
+    <string>kakaolink</string>
+</array>
+```
+
+2.개발자 > 플랫폼에서 IOS 추가 및 bundleID 등록.
+
+#### ANDROID
+
+1.카카오 개발자에서 발급된 네이티브 앱 키(kakao-api-key)를 직접 앱에 등록한다.
+/android/app/src/main/res/values/strings.xml 에 키 등록
+
+```xml
+<resources>
+    <string name="app_name">cloneCoding</string>
+    <string name="kakao_app_key">{kakao-api-key}</string> <!-- API 호출 -->
+    <string name="kakao_app_redirect">kakao{kakao-api-key}</string>  <!-- 리다이렉트 경로 -->
+</resources>
+```
+
+2.AndroidManifest.xml 에 리다이렉트 설정을 위해 코드 추가.
+
+```xml
+<activity
+    android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+    android:exported="true">
+    <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+
+        <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth“ -->
+        <data android:host="oauth"
+            android:scheme="@string/kakao_app_redirect" />
+    </intent-filter>
+</activity>
+```
+
+3.카카오 개발자 안드로이드 키 해시 조회
 
 ```sh
 keytool -exportcert -alias androiddebugkey -keystore ~/.android/debug.keystore -storepass android -keypass android | openssl sha1 -binary | openssl base64
 
 ```
+
+조회된 key hash 를 카카오 개발자에서 android의 키해시에 등록.
+주의!!!) 해시 등록을 안할경우 인증에러 발생됨.

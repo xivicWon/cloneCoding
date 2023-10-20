@@ -42,6 +42,7 @@ const NaverSign = () => {
   const getProfile = async () => {
     try {
       const profileResult = await NaverLogin.getProfile(success!.accessToken);
+      console.log(profileResult);
       setGetProfileRes(profileResult);
     } catch (e) {
       setGetProfileRes(undefined);

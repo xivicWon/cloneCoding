@@ -1,6 +1,6 @@
 import React from 'react';
 import {SafeAreaView} from 'react-native';
-// import NaverSign from './naverSign';
+// import NaverSign from './NaverSign';
 import KakaoSign from './KakaoSign';
 
 const App = () => {

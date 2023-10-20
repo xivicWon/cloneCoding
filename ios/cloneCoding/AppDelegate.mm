@@ -15,12 +15,7 @@
     return [[NaverThirdPartyLoginConnection getSharedInstance] application:application openURL:url options:options];
   }
   
-  return [[NaverThirdPartyLoginConnection getSharedInstance] application:application openURL:url options:options];
-
-  // kakao
-  //  if([RNKakaoLogins isKakaoTalkLoginUrl:url]) {
-  //    return [RNKakaoLogins handleOpenUrl: url];
-  //  }
+  return NO;
 }
 // >>>
 

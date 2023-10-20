@@ -1,10 +1,9 @@
-import {Pressable, StyleSheet, Text, View} from 'react-native';
+import {Pressable, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
 import {
   login,
   logout,
   getProfile as getKakaoProfile,
-  shippingAddresses as getKakaoShippingAddresses,
   unlink,
 } from '@react-native-seoul/kakao-login';
 import ResultView from './IntroView';
@@ -34,7 +33,7 @@ const Intro = () => {
   const getProfile = async (): Promise<void> => {
     try {
       const profile = await getKakaoProfile();
-
+      console.log(profile);
       setResult(JSON.stringify(profile));
     } catch (err) {
       console.error('signOut error', err);
@@ -52,7 +51,7 @@ const Intro = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <ResultView result={result} />
       <Pressable
         style={styles.button}
@@ -70,7 +69,7 @@ const Intro = () => {
       <Pressable style={styles.button} onPress={() => signOutWithKakao()}>
         <Text style={styles.text}>카카오 로그아웃</Text>
       </Pressable>
-    </View>
+    </SafeAreaView>
   );
 };
 
